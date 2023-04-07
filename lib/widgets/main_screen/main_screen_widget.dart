@@ -60,6 +60,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             label: 'Movie',
           ),
         ],
+
         onTap: onSelectTab,
       ),
     );
