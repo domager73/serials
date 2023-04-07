@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../auth/auth_widget.dart';
-
 class MainScreenWidget extends StatefulWidget {
   MainScreenWidget({Key? key}) : super(key: key);
 
@@ -10,12 +8,25 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  final color = Color(0xff01B4E4);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'News',
+    ),
+    Text(
+      'Serial',
+    ),
+    Text(
+      'Movie',
+    ),
+  ];
 
-  void _login() {
-    final navigator = Navigator.of(context);
+  int _selecrtedTad = 1;
 
-    navigator.pushReplacementNamed('/auth');
+  void onSelectTab(int index){
+    if(_selecrtedTad == index) return;
+    setState(() {
+      _selecrtedTad = index;
+    });
   }
 
   @override
@@ -26,24 +37,30 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Serial'),
-            SizedBox(
-              width: 1,
-            ),
-            TextButton(
-              onPressed: _login,
-              child: Text('Login'),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(color),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                textStyle: MaterialStateProperty.all(
-                  TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                ),
-                padding: MaterialStateProperty.all(
-                    EdgeInsets.symmetric(horizontal: 15, vertical: 8)),
-              ),
-            ),
           ],
         ),
+      ),
+      body:
+      Center(
+          child: _widgetOptions[_selecrtedTad],
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selecrtedTad,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'News'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tv),
+            label: 'Serial',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.movie_filter),
+            label: 'Movie',
+          ),
+        ],
+        onTap: onSelectTab,
       ),
     );
   }
