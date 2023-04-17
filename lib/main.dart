@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => MainScreenWidget(),
-        '/auth': (context) => AuthWidget(),
+        'main': (context) => MainScreenWidget(),
+        'auth': (context) => AuthWidget(),
       },
-      initialRoute: "/",
+      initialRoute: "main",
     );
   }
 }
